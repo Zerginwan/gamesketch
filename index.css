@@ -1,0 +1,29 @@
+
+.figure {
+    display: flex;
+    width: 4em;
+    height: 4em;
+    border-radius: 2em;
+    position: relative;
+    cursor: pointer;
+}
+
+.firstplayer {
+    background-color: crimson;
+}
+
+.secondplayer {
+    background-color: skyblue;
+}
+
+.hold {
+    border: solid skyblue 2px;
+}
+
+.hovered {
+    background: lavender;
+}
+
+.invisible {
+    display: none;
+}
