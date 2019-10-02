@@ -32,15 +32,21 @@ function drop(ev) {
 	
 	ev.preventDefault();
 	let data = ev.dataTransfer.getData("text");
-	let canDropBoolean = false; //по-умолчанию мы не можем перетащить. Действуем по "белому списку".
-
+	let canDropBoolean = true; //по-умолчанию мы не можем перетащить. Действуем по "белому списку".
+	console.log(ev.target.classList.contains('figure'));
+	//выбираем ячейку, в которую дропнули.
+	if (ev.target.classList.contains('cell')){
+		var targetDiv = ev.target
+	}else{
+		var targetDiv = ev.target.parentElement;
+	}
 	//проверка, можно ли вообще в эту клетку что-то ставить. Если нет - ничего не происходит
 	if (canDropBoolean){
 
-	//если там есть фигурка, удаляем ее прежде чем вставлять новую
-		if (ev.target.id) {
+	//если в ячейке есть что-либо, удаляем это прежде чем вставлять новую фигуру
+		if (targetDiv.childNodes.length>0) {
 
-		let targetDiv = ev.target.parentElement;
+		
 		ev.target.parentElement.removeChild(ev.target);
 		targetDiv.appendChild(document.getElementById(data));
 
@@ -71,7 +77,7 @@ function drop(ev) {
 		}
 		//Пишем id в новое место
 		positionMatrix[pos[0]][pos[1]] = thisId;
-		}else {
+		}else{
 		ev.target.appendChild(document.getElementById(data)); 
 		
 		//ищем позицию дива в positionMatrix
