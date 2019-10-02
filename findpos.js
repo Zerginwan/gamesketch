@@ -1,15 +1,16 @@
 //ищем местоположение, которая фигура занимает в positionMatrix
 function findFigurePosition(event) {
-    
-    for (var i=0; i<positionMatrix.length; i++) {
-        var findId = positionMatrix[i].indexOf(event.target.id);
-        var positionColumn = NaN;
+    let positionColumn;
+    let positionRow;
+    for (let i=0; i<positionMatrix.length; i++) {
+        let findId = positionMatrix[i].indexOf(event.target.id);
+        positionColumn = NaN;
         if (findId >= 0)
             positionColumn = findId; 
-            var positionRow = i;
+            positionRow = i;
     }
 
-    var currentPosition = [positionRow, positionColumn];
+    let currentPosition = [positionRow, positionColumn];
     return currentPosition;
 }
 
@@ -17,12 +18,13 @@ function findFigurePosition(event) {
 //чтобы при движении менялась и positionMatrix
 
 //ф-ия, чтобы узнать позицию пустого дива
+//Возвращает массив кординат - X и Y
 function findDivPosition(event){
     //ищем столбец с помощью подсчета предыдущих сиблингов previousSibling
-    var count = 0;
-    var p = event.target.previousSibling;
+    let count = 0;
+    let p = event.target.previousSibling;
     
-    for (var i=0; i<4; i++) {
+    for (let i=0; i<columnsNumber; i++) {
         
         if (p != null) {
             count = count + 1;
@@ -30,15 +32,15 @@ function findDivPosition(event){
         }   
     }
     
-    var divColumn = count;
+    let divColumn = count;
     
     //ищем строку с помощью parentElement и previousSibling
-    var count=0;
-    var parent = event.target.parentElement;
+    count=0;
+    let parent = event.target.parentElement;
 
-    var p = parent.previousSibling;
+    p = parent.previousSibling;
 
-    for (var i=0; i<4; i++) {
+    for (let i=0; i < rowsNumber; i++ ) {
 
         if (p!=null) {
             count = count + 1;
@@ -46,8 +48,8 @@ function findDivPosition(event){
         }
     }
 
-    var divRow = count;
-    var divPos = [divRow, divColumn];
+    let divRow = count;
+    let divPos = [divRow, divColumn];
     console.log(divPos);
     return divPos;
 
@@ -55,10 +57,10 @@ function findDivPosition(event){
 
 function findDivPositionReplaced(cell){
     //ищем столбец с помощью подсчета предыдущих сиблингов previousSibling
-    var count = 0;
-    var p = cell.previousSibling;
+    let count = 0;
+    let p = cell.previousSibling;
     
-    for (var i=0; i<4; i++) {
+    for (let i=0; i<columnsNumber; i++) {
         
         if (p != null) {
             count = count + 1;
@@ -66,13 +68,13 @@ function findDivPositionReplaced(cell){
         }   
     }
     
-    var divColumn = count;
+    let divColumn = count;
 
     //ищем строку с помощью parentElement и previousSibling
-    var count=0;
-    var parent = cell.parentElement;
-    var p = parent.previousSibling;
-    for (var i=0; i<5; i++) {
+    count=0;
+    let parent = cell.parentElement;
+    p = parent.previousSibling;
+    for (let i=0; i<rowsNumber; i++) {
 
         if (p!=null) {
             count = count + 1;
@@ -80,8 +82,8 @@ function findDivPositionReplaced(cell){
         }
     }
 
-    var divRow = count;
-    var divPos = [divRow, divColumn];
+    let divRow = count;
+    let divPos = [divRow, divColumn];
     console.log(divPos);
     return divPos;
 }

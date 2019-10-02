@@ -1,22 +1,22 @@
 //создаем фигурки
-var allRows = document.querySelectorAll('.row');
+let allRows = document.querySelectorAll('.row');
 
-var lastRow = allRows[allRows.length - 1];
-var lastRowCells = lastRow.querySelectorAll('.cell');
+let lastRow = allRows[allRows.length - 1];
+let lastRowCells = lastRow.querySelectorAll('.cell');
 
-var firstRow = allRows[0];
-var firstRowCells = firstRow.querySelectorAll('.cell');
+let firstRow = allRows[0];
+let firstRowCells = firstRow.querySelectorAll('.cell');
 
 
-for (var i=0; i<5; i++) {
-    var figure = document.createElement('div');
-    var newId = 'id1' + i;
+for (let i=0; i<columnsNumber; i++) {
+    let figure = document.createElement('div');
+    let newId = 'id1' + i;
     figure.setAttribute('id', newId);
     figure.setAttribute('class', 'figure firstplayer');
     lastRowCells[i].append(figure);
 
-    var figure2 = document.createElement('div');
-    var newId2 = 'id2' + i;
+    let figure2 = document.createElement('div');
+    let newId2 = 'id2' + i;
     figure2.setAttribute('id', newId2);
     figure2.setAttribute('class', 'figure secondplayer');
     firstRowCells[i].append(figure2);
@@ -25,29 +25,29 @@ for (var i=0; i<5; i++) {
 //data structure
 
 //creating empty matrix
-var positionMatrix = [];
-for (let i=0; i<5; i++) {
+let positionMatrix = [];
+for (let i=0; i<rowsNumber; i++) {
     positionMatrix.push([]);
 }
-for (var el of positionMatrix) {
-    for (let i=0; i<5; i++) {
+for (let el of positionMatrix) {
+    for (let i=0; i<columnsNumber; i++) {
         el.push(0);
     }
 }
 
 //filling matrix with figures id
 
-var firstFigures = document.querySelectorAll('.firstplayer');
+let firstFigures = document.querySelectorAll('.firstplayer');
 
-for (var i=0; i<5; i++) {
-    positionMatrix[4][i] = firstFigures[i].id;
+for (let i=0; i<columnsNumber; i++) {
+    let rowCount = rowsNumber - 1;
+    positionMatrix[rowCount][i] = firstFigures[i].id;
 }
 
-var secondFigures = document.querySelectorAll('.secondplayer');
+let secondFigures = document.querySelectorAll('.secondplayer');
 
-for (var i=0; i<5; i++) {
+for (let i=0; i<columnsNumber; i++) {
     positionMatrix[0][i] = secondFigures[i].id;
 }
-
 
 
