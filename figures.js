@@ -21,3 +21,33 @@ for (var i=0; i<5; i++) {
     figure2.setAttribute('class', 'figure secondplayer');
     firstRowCells[i].append(figure2);
 }
+
+//data structure
+
+//creating empty matrix
+var positionMatrix = [];
+for (let i=0; i<5; i++) {
+    positionMatrix.push([]);
+}
+for (var el of positionMatrix) {
+    for (let i=0; i<5; i++) {
+        el.push(0);
+    }
+}
+
+//filling matrix with figures id
+
+var firstFigures = document.querySelectorAll('.firstplayer');
+
+for (var i=0; i<5; i++) {
+    positionMatrix[4][i] = firstFigures[i].id;
+}
+
+var secondFigures = document.querySelectorAll('.secondplayer');
+
+for (var i=0; i<5; i++) {
+    positionMatrix[0][i] = secondFigures[i].id;
+}
+
+
+
