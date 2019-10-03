@@ -171,7 +171,7 @@ function setLight(ev) {
 	//пробегаем по всем правилам и навешиваем allowDrop
 	//Пока совсем по всем. надо будет переделать, когда появятся частные правила.
 	for (let i=0;i<rulesCount;i++){ 
-			let rule = rulesArray[i];
+			let rule = rulesArray[i].arr;
 			//получаем правило из точек в массиве json-ов. 
 			rule=change_rule(rule, playerClassRuleModifier);
 			for (let el of rule){

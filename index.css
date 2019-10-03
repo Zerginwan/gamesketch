@@ -31,3 +31,10 @@
 .allowdrop{
     background-color: lightgreen;
 }
+
+div.rulecenter{
+    background-color: black;
+}
+div.ruledot{
+    background-color: lightgreen;
+}

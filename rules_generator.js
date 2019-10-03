@@ -1,6 +1,6 @@
 //Генерим "бумажки". Private - сколько "личных" правил. General - Сколько общих.
 //Пока все общие.
-let privateRulesCount = 0;
+let privateRulesCount = 2;
 let generalRulesCount = 1;
 let dotsInRule = 4;  //сколько ходов в одном правиле.
 let rulesCount = (privateRulesCount * 2) + generalRulesCount;
@@ -33,19 +33,77 @@ function generateRulesArray(){
         for (let j=0;j<dotsInRule;j++){
             arr.push(random_cell());
         }
-        rulesArray.push(arr);       //добавляем "Бумажку" к массиву "Бумажек"
+        //назначаем правило игроку или всем
+        let player = "";
+        switch (true){
+            case(i < privateRulesCount):
+                player = "firstplayer";
+                break;
+            case(i < (privateRulesCount * 2)):
+                player = "secondplayer";
+                break;
+            default:
+                player = "all";
+                break;
+        }
+        rulesArray.push({
+            name:   "rule_" + i,
+            player: player,
+            arr:    arr
+        });       //добавляем JSON - "Бумажку" к массиву "Бумажек"
     }
+    console.log(rulesArray);
     return rulesArray;
 
 }
-//заглушка для рисования "Бумажек". Вспомогательная функция.
-function drawRules(){
+//рисуем таблички для drawRules
+function makeTable(name, player){
+    let table = document.createElement('div');
+    table.setAttribute('id', name);
+    table.style.cssText = 'height: 5em; width: 5em; display: flex;'; 
+    table.style.cssText += 'justify-content: center; align-items: center';
+    let tablePlaceId = player+"_rules";
+    document.getElementById(tablePlaceId).append(table);
 
+
+    for (let i=0; i<5; i++) {
+        let row = document.createElement('div');
+        row.style.cssText = 'display: flex; flex-flow: column wrap;width: 5em; height: 1em;'
+
+        for (let j=0; j<5; j++) {
+            let cell = document.createElement('div');
+            cell.style.cssText = 'display: flex; border: 1px black solid; width: 1em;' ;
+            cell.style.cssText += 'height: 1em; border-right: 0px; border-bottom: 0px;';
+            cell.style.cssText += 'justify-content: center; align-items: center;';
+            row.append(cell);
+        }
+        table.append(row);
+    }
+    return table;
+}
+
+
+//заглушка для рисования "Бумажек". Вспомогательная функция.
+function drawRules(rulesArray){
+    for(let rule in rulesArray){
+        //создаем таблицу
+
+        let table = makeTable(rulesArray[rule].name, rulesArray[rule].player);
+        //добавляем в таблицу точки.
+        for (let dot=0;dot<dotsInRule;dot++){
+            let row = rulesArray[rule].arr[dot].row;
+            let column = rulesArray[rule].arr[dot].column;
+            console.log(table.childNodes);
+            table.childNodes[row].childNodes[column].classList.add("ruledot");
+        }
+        //добавляем таблице центральную точку.
+        table.childNodes[2].childNodes[2].classList.add("rulecenter");
+    }
 }
 
 function generateRules(privateRulesCount, generalRulesCount){
     rulesArray = generateRulesArray();
-    drawRules();
+    drawRules(rulesArray);
     console.log(rulesArray);
 
 }

@@ -6,7 +6,7 @@ function buildField(x, y) {
     container.setAttribute('id', 'container');
     container.style.cssText = 'height: 35em; display: flex;'; 
     container.style.cssText += 'justify-content: center; align-items: center';
-    document.body.append(container);
+    document.getElementById('field_div').append(container);
 
     let field = document.createElement('div');
     field.setAttribute('id', 'field');
