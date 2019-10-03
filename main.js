@@ -126,7 +126,7 @@ function drop(ev) {
 
 	   
 		}
-
+		removeLight(ev);
 		end_turn();
 
 	}
