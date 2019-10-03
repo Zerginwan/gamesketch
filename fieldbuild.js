@@ -15,12 +15,12 @@ function buildField(x, y) {
 
     for (let i=0; i<x; i++) {
         let row = document.createElement('div');
-        row.setAttribute('class', 'row');
+        row.setAttribute('class', "row row_" + i);
         row.style.cssText = 'display: flex; width: 25em; height: 5em;'
 
         for (let j=0; j<y; j++) {
             let cell = document.createElement('div');
-            cell.setAttribute('class', 'cell');
+            cell.setAttribute('class', "cell cell_" + j);
             cell.style.cssText = 'display: flex; border: 1px black solid; width: 5em;' ;
             cell.style.cssText += 'height: 5em; border-right: 0px; border-bottom: 0px;';
             cell.style.cssText += 'justify-content: center; align-items: center;';

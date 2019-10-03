@@ -2,17 +2,45 @@
 function findFigurePosition(event) {
     let positionColumn;
     let positionRow;
-    //пробегаемся по строчкам и находим совпадение по ID, вычисляем его порядок в масиивея
-    for (let i=0; i<positionMatrix.length; i++) {
+    //пробегаемся по строчкам и находим совпадение по ID, вычисляем его порядок в масииве.
+    for (let i=0; i<rowsNumber; i++) {
         let findId = positionMatrix[i].indexOf(event.target.id);
         positionColumn = NaN;
-        if (findId >= 0)
+        if (findId >= 0){
             positionColumn = findId; 
             positionRow = i;
+        }
     }
 
     let currentPosition = [positionRow, positionColumn];
+    
     return currentPosition;
+}
+//альтернативное нахождение координат. Ищет по имени класса ячейки и строки
+function quickFindFigurePosition(event) {
+    let thisId = event.target.id;
+    let figure = document.getElementById(thisId);
+    let cell = figure.parentElement;
+    let row = cell.parentElement;
+    let positionColumn = NaN;
+    let positionRow = NaN;
+//пробегаемся по классам строкии находим класс с номером. Обрезаем, получаем номер.
+    for (let className of row.classList) {
+        if ( className.startsWith("row_")  ) {
+             positionRow = className.slice(4);
+        }
+    }
+//тоже самое с ячейкой.
+    for (let className of cell.classList) {
+        if ( className.startsWith("cell_")  ) {
+             positionColumn = className.slice(5);
+        }
+    }
+//возвращаем JSON
+    return {
+        row:    positionRow,
+        column: positionColumn
+    }
 }
 
 //cейчас при движении фигурки ее координаты не обновляются, потому что нам нужно,
@@ -51,7 +79,7 @@ function findDivPosition(event){
 
     let divRow = count;
     let divPos = [divRow, divColumn];
-    console.log(divPos);
+    //    console.log(divPos);
     return divPos;
 
 }
@@ -85,6 +113,6 @@ function findDivPositionReplaced(cell){
 
     let divRow = count;
     let divPos = [divRow, divColumn];
-    console.log(divPos);
+    // console.log(divPos);
     return divPos;
 }

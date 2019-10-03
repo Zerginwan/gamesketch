@@ -1,6 +1,10 @@
 //Генерим "бумажки". Private - сколько "личных" правил. General - Сколько общих.
-let privateRulesCount = 2;
+//Пока все общие.
+let privateRulesCount = 0;
 let generalRulesCount = 1;
+let dotsInRule = 4;  //сколько ходов в одном правиле.
+let rulesCount = (privateRulesCount * 2) + generalRulesCount;
+let rulesArray = [];
 
 
 
@@ -9,21 +13,24 @@ let generalRulesCount = 1;
 function random_cell(){
     let rand1 = Math.floor(Math.random() * 5);
     let rand2 = Math.floor(Math.random() * 5);
-    while(rand1 == rand2 == 2){
+    while(rand1 == rand2 && rand2 == 2){
         rand2 = Math.floor(Math.random() * 5);
     }
-    return [rand1, rand2];
+    //возвращаем JSON-ом
+    return {row: rand1, 
+            column: rand2
+        };
 }
 
 
 //генерируем массив и возвращаем его. Вспомогательная функция.
 function generateRulesArray(){
     let rulesArray = []; //создаем массив для правил
-    let count = (privateRulesCount * 2) + generalRulesCount;
     //делаем сколько-то правил. x2 частных x1 общих.
-    for (let i=0;i<count;i++){
+    for (let i=0;i<rulesCount;i++){
         let arr = [];               //создаем массив для клеток ходов. "Бумажка"
-        for (let j=0;j<4;j++){
+        //в каждую бумажку тыкаем dotsInRule ходов.
+        for (let j=0;j<dotsInRule;j++){
             arr.push(random_cell());
         }
         rulesArray.push(arr);       //добавляем "Бумажку" к массиву "Бумажек"
@@ -37,7 +44,8 @@ function drawRules(){
 }
 
 function generateRules(privateRulesCount, generalRulesCount){
-    var rulesArray = generateRulesArray();
+    rulesArray = generateRulesArray();
+    drawRules();
     console.log(rulesArray);
 
 }
