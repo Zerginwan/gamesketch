@@ -39,15 +39,17 @@ div.rule_dot{
     background-color: lightgreen;
 }
 .rule_table{
-    display:   flex;
+    display:   inline-flex;
     height:     5em;
+    width:      5em;
 }
 
 .rule_row{
 
     height: 1em;
     width: 5em;
-    border-bottom: 10px;
+    border-bottom: 0.1em;
+    border-color: skyblue
 }
 
 .rule_cell{
@@ -59,4 +61,9 @@ div.rule_dot{
 .player_rules{
     align-self: stretch;
     align-items: center;
+}
+.selected{
+    outline-style: double;
+    outline:        0.2em;
+    outline-color:  tomato;
 }

@@ -5,6 +5,7 @@ let generalRulesCount = 1;
 let dotsInRule = 4;  //сколько ходов в одном правиле.
 let rulesCount = (privateRulesCount * 2) + generalRulesCount;
 let rulesArray = [];
+let selectedRule = "";
 
 
 
@@ -74,7 +75,7 @@ function makeTable(name, player){
         }
         table.append(row);
     }
- 
+    
     return table;
 }
 
@@ -94,7 +95,9 @@ function drawRules(rulesArray){
         //добавляем таблице центральную точку.
         table.childNodes[2].childNodes[2].classList.add("rule_center");
     }
-}
+    
+ 
+ }
 
 function generateRules(privateRulesCount, generalRulesCount){
     rulesArray = generateRulesArray();
@@ -102,4 +105,24 @@ function generateRules(privateRulesCount, generalRulesCount){
 
 }
 
+
 generateRules(privateRulesCount, generalRulesCount);
+
+
+//селектим табличку с нужным правилом.
+$(".rule_table").click(function(){
+    //если она уже заселекчена, то все селеккты сбрасываются
+    if( this.classList.contains("selected") ){
+        $(".selected").removeClass("selected") ;
+        selectedRule = "";
+        
+    }else{
+    //если не заселекчена, все другие селекты сбрасываются, а этот селект появляется.
+        $(".selected").removeClass("selected") ;
+        this.classList.add("selected");
+        selectedRule = this.id;
+        
+    }
+
+    
+});

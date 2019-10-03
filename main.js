@@ -157,6 +157,17 @@ function change_rule(array, modifier){
 	return rule;
 }
 
+
+//Ищем элемент масива по значению JSON'a
+function findElement(arr, propName, propValue) {
+	for (var i=0; i < arr.length; i++)
+	  if (arr[i][propName] == propValue)
+		return arr[i];
+  
+	// will return undefined if not found; you could return a default instead
+  }
+
+
 function setLight(ev) {
 	//находим позицию фигуры, на которой мышка
 	let pos = quickFindFigurePosition(ev);
@@ -168,9 +179,34 @@ function setLight(ev) {
 		var playerClass = "secondplayer";
 		var playerClassRuleModifier = -1;
 	}
+	//если есть выделенное правило, учитывается только оно.
+	if(selectedRule){
+			rule = findElement(rulesArray, 'name', selectedRule).arr
+			rule=change_rule(rule, playerClassRuleModifier);
+			for (let el of rule){
+				//складываем правило с матрицей
+				let y = parseInt(pos.row) + parseInt(el.row);
+				let x = parseInt(pos.column) + parseInt(el.column);
+				//ввыбираем потомка нужного .row_* с нужным .cell_*
+				let rowClass = '.row_' + y;
+				let cell = document.querySelectorAll(rowClass + ' .cell_' + x )[0];
+				//добавляем класс allowdrop в найденные ячейки
+				if (cell) {
+					//проверка - нет ли там фигру
+					if( cell.childNodes.length > 0){
+						//если фигуры есть - нужно убедиться, что они не наши
+						if( !( cell.childNodes[0].classList.contains(playerClass) ) ){
+							cell.classList.add('allowdrop');
+						}
+					}else{ //если фигур нет - просто светим клетку
+						cell.classList.add('allowdrop');
+					}
+				}
+
+			}
 	//пробегаем по всем правилам и навешиваем allowDrop
-	//Пока совсем по всем. надо будет переделать, когда появятся частные правила.
-	for (let i=0;i<rulesCount;i++){ 
+	}else{
+		for (let i=0;i<rulesCount;i++){ 
 			let rule = rulesArray[i].arr;
 			//получаем правило из точек в массиве json-ов. 
 			rule=change_rule(rule, playerClassRuleModifier);
@@ -195,7 +231,7 @@ function setLight(ev) {
 				}
 
 			}
-			
+		}	
 
 
 	}
