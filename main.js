@@ -187,7 +187,6 @@ function setLight(ev) {
 					if( cell.childNodes.length > 0){
 						//если фигуры есть - нужно убедиться, что они не наши
 						if( !( cell.childNodes[0].classList.contains(playerClass) ) ){
-							console.log(cell.childNodes[0].classList.contains(playerClass) );
 							cell.classList.add('allowdrop');
 						}
 					}else{ //если фигур нет - просто светим клетку

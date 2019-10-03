@@ -32,9 +32,31 @@
     background-color: lightgreen;
 }
 
-div.rulecenter{
+div.rule_center{
     background-color: black;
 }
-div.ruledot{
+div.rule_dot{
     background-color: lightgreen;
+}
+.rule_table{
+    display:   flex;
+    height:     5em;
+}
+
+.rule_row{
+
+    height: 1em;
+    width: 5em;
+    border-bottom: 10px;
+}
+
+.rule_cell{
+
+    height: 1em;
+    width: 1em;
+}
+
+.player_rules{
+    align-self: stretch;
+    align-items: center;
 }

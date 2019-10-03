@@ -4,7 +4,7 @@ var rowsNumber = 5;  //y
 function buildField(x, y) {
     let container = document.createElement('div');
     container.setAttribute('id', 'container');
-    container.style.cssText = 'height: 35em; display: flex;'; 
+    container.style.cssText = ' display: flex;'; 
     container.style.cssText += 'justify-content: center; align-items: center';
     document.getElementById('field_div').append(container);
 

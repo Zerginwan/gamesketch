@@ -52,7 +52,6 @@ function generateRulesArray(){
             arr:    arr
         });       //добавляем JSON - "Бумажку" к массиву "Бумажек"
     }
-    console.log(rulesArray);
     return rulesArray;
 
 }
@@ -60,25 +59,22 @@ function generateRulesArray(){
 function makeTable(name, player){
     let table = document.createElement('div');
     table.setAttribute('id', name);
-    table.style.cssText = 'height: 5em; width: 5em; display: flex;'; 
-    table.style.cssText += 'justify-content: center; align-items: center';
+    table.classList.add('rule_table');
     let tablePlaceId = player+"_rules";
     document.getElementById(tablePlaceId).append(table);
 
 
     for (let i=0; i<5; i++) {
         let row = document.createElement('div');
-        row.style.cssText = 'display: flex; flex-flow: column wrap;width: 5em; height: 1em;'
-
+        row.classList.add('rule_row');
         for (let j=0; j<5; j++) {
             let cell = document.createElement('div');
-            cell.style.cssText = 'display: flex; border: 1px black solid; width: 1em;' ;
-            cell.style.cssText += 'height: 1em; border-right: 0px; border-bottom: 0px;';
-            cell.style.cssText += 'justify-content: center; align-items: center;';
+            cell.classList.add('rule_cell');
             row.append(cell);
         }
         table.append(row);
     }
+ 
     return table;
 }
 
@@ -93,18 +89,16 @@ function drawRules(rulesArray){
         for (let dot=0;dot<dotsInRule;dot++){
             let row = rulesArray[rule].arr[dot].row;
             let column = rulesArray[rule].arr[dot].column;
-            console.log(table.childNodes);
-            table.childNodes[row].childNodes[column].classList.add("ruledot");
+            table.childNodes[row].childNodes[column].classList.add("rule_dot");
         }
         //добавляем таблице центральную точку.
-        table.childNodes[2].childNodes[2].classList.add("rulecenter");
+        table.childNodes[2].childNodes[2].classList.add("rule_center");
     }
 }
 
 function generateRules(privateRulesCount, generalRulesCount){
     rulesArray = generateRulesArray();
     drawRules(rulesArray);
-    console.log(rulesArray);
 
 }
 
