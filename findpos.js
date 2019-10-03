@@ -2,6 +2,7 @@
 function findFigurePosition(event) {
     let positionColumn;
     let positionRow;
+    //пробегаемся по строчкам и находим совпадение по ID, вычисляем его порядок в масиивея
     for (let i=0; i<positionMatrix.length; i++) {
         let findId = positionMatrix[i].indexOf(event.target.id);
         positionColumn = NaN;

@@ -32,14 +32,23 @@ function drop(ev) {
 	
 	ev.preventDefault();
 	let data = ev.dataTransfer.getData("text");
-	let canDropBoolean = true; //по-умолчанию мы не можем перетащить. Действуем по "белому списку".
-	console.log(ev.target.classList.contains('figure'));
+	/////let canDropBoolean = false; //по-умолчанию мы можем перетащить. Действуем по "черному списку".
+	let canDropBoolean = false; //по-умолчанию мы не можем перетащить. Действуем по "белому списку".
+	
+	
 	//выбираем ячейку, в которую дропнули.
 	if (ev.target.classList.contains('cell')){
 		var targetDiv = ev.target
 	}else{
 		var targetDiv = ev.target.parentElement;
 	}
+
+	//если в ячейке есть класс allowDrop - разрешаем дроп
+	if (targetDiv.classList.contains('allowDrop')){
+		canDropBoolean = true;
+	}
+
+
 	//проверка, можно ли вообще в эту клетку что-то ставить. Если нет - ничего не происходит
 	if (canDropBoolean){
 
@@ -117,9 +126,12 @@ function drop(ev) {
 
 	   
 		}
+
+		end_turn();
+
 	}
 }
- //выдает баг, если «пожирать» фигурку в той же строке на предыдущей позиции
+
 
 //Подсветка допустимых клеток
 for (let el of allFigures) {
@@ -128,10 +140,17 @@ for (let el of allFigures) {
 }
 
 function setLight(event) {
-	findFigurePosition(event);
+	let pos = findFigurePosition(event);
 }
 
 function removeLight(event) {
-	findFigurePosition(event);
+	let pos = findFigurePosition(event);
 }
 
+//заглушка для функции передачи хода.
+function end_turn(){
+	do_we_won();
+}
+//заглушка для функции проверки выигрыша.
+function do_we_won(){
+}

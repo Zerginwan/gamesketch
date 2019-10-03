@@ -1,5 +1,5 @@
 var columnsNumber = 5; //x
-var rowsNumber = 7;  //y
+var rowsNumber = 5;  //y
 //x - ширина y  - высота
 function buildField(x, y) {
     let container = document.createElement('div');
