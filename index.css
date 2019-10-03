@@ -27,3 +27,7 @@
 .invisible {
     display: none;
 }
+
+.allowDrop{
+    background-color: lightgreen;
+}
