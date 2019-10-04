@@ -2,6 +2,7 @@
 
 let allFigures = document.querySelectorAll('.figure');
 let allCells = document.querySelectorAll('.cell');
+let turnPlayer = "firstplayer";
 
 
 //Проходимся циклом по фигуркам и назначаем drag event и св-во draggable
@@ -43,8 +44,8 @@ function drop(ev) {
 		var targetDiv = ev.target.parentElement;
 	}
 
-	//если в ячейке есть класс allowDrop - разрешаем дроп
-	if (targetDiv.classList.contains('allowdrop')){
+	//если в ячейке есть класс allowDrop_selected - разрешаем дроп
+	if (targetDiv.classList.contains('allowdrop_selected')){
 		canDropBoolean = true;
 	}
 
@@ -126,6 +127,9 @@ function drop(ev) {
 
 	   
 		}
+
+		//убираем свет, чтобы не было двойной засветки.
+		
 		removeLight(ev);
 		end_turn();
 
@@ -160,27 +164,33 @@ function change_rule(array, modifier){
 
 //Ищем элемент масива по значению JSON'a
 function findElement(arr, propName, propValue) {
-	for (var i=0; i < arr.length; i++)
-	  if (arr[i][propName] == propValue)
+	
+	for (var i=0; i < arr.length; i++){
+	  if (arr[i][propName] == propValue){
+
 		return arr[i];
-  
+	  }
+	}
 	// will return undefined if not found; you could return a default instead
   }
 
 
 function setLight(ev) {
-	//находим позицию фигуры, на которой мышка
-	let pos = quickFindFigurePosition(ev);
-	//находим класс игрока
-	if (ev.target.classList.contains('firstplayer')){
-		var playerClass = "firstplayer";
-		var playerClassRuleModifier = 1;
-	}else{
-		var playerClass = "secondplayer";
-		var playerClassRuleModifier = -1;
-	}
-	//если есть выделенное правило, учитывается только оно.
-	if(selectedRule){
+	//подсвечиваем только для своих фигру
+	if( ev.target.classList.contains(turnPlayer) ){
+
+		//находим позицию фигуры, на которой мышка
+		let pos = quickFindFigurePosition(ev);
+		//находим класс игрока
+		if (ev.target.classList.contains('firstplayer')){
+			var playerClass = "firstplayer";
+			var playerClassRuleModifier = 1;
+		}else{
+			var playerClass = "secondplayer";
+			var playerClassRuleModifier = -1;
+		}
+		//если есть выделенное правило, учитывается только оно. Навешиваем allowdrop_selected
+		if(selectedRule){
 			rule = findElement(rulesArray, 'name', selectedRule).arr
 			rule=change_rule(rule, playerClassRuleModifier);
 			for (let el of rule){
@@ -196,18 +206,24 @@ function setLight(ev) {
 					if( cell.childNodes.length > 0){
 						//если фигуры есть - нужно убедиться, что они не наши
 						if( !( cell.childNodes[0].classList.contains(playerClass) ) ){
-							cell.classList.add('allowdrop');
+							cell.classList.add('allowdrop_selected');
 						}
 					}else{ //если фигур нет - просто светим клетку
-						cell.classList.add('allowdrop');
+						cell.classList.add('allowdrop_selected');
 					}
 				}
 
 			}
-	//пробегаем по всем правилам и навешиваем allowDrop
-	}else{
-		for (let i=0;i<rulesCount;i++){ 
-			let rule = rulesArray[i].arr;
+	//если нет выделенного - пробегаем по всем нашим правилам и навешиваем allowDrop
+		}else{
+		//берем список наших правил.
+		let ruleNames = [];
+		for (let table of document.getElementById(turnPlayer+'_rules').childNodes){
+			ruleNames.push(table.id);
+		}
+
+		for (let ruleName of ruleNames){ 
+			let rule = findElement(rulesArray, 'name', ruleName).arr;
 			//получаем правило из точек в массиве json-ов. 
 			rule=change_rule(rule, playerClassRuleModifier);
 			for (let el of rule){
@@ -234,6 +250,7 @@ function setLight(ev) {
 		}	
 
 
+		}
 	}
 }
 
@@ -244,12 +261,37 @@ function removeLight(ev) {
 	for (let cell of cellArray){
 		cell.classList.remove('allowdrop');
 	}
+	$(".allowdrop_selected").removeClass("allowdrop_selected");
 }
+function getIdOfRandomTable(div_id){
+	let tableArray = $("div#"+div_id).children();
+	//берем рандомную таблицу, возвращаем ее id
+	let tableId = tableArray[Math.floor( Math.random() * tableArray.length )].id;
 
+	return tableId;
+}
+//меняем таблицы местами.
+function swapTurnTables(id_private, id_all){
+	let privateRule = findElement(rulesArray, 'name', id_private);
+	let allRule = findElement(rulesArray, 'name', id_all);
+	privateRule.player = 'all';
+	allRule.player = turnPlayer;
+}
 //заглушка для функции передачи хода.
 function end_turn(){
+	swapTurnTables(selectedRule, getIdOfRandomTable('all_rules') );
+	turnPlayer = (turnPlayer == "firstplayer") ? "secondplayer" : "firstplayer";
+	redrawRules(rulesArray);
+
+	unselectAll();
 	do_we_won();
+	changeDivPlayerTurn();
 }
 //заглушка для функции проверки выигрыша.
 function do_we_won(){
 }
+function changeDivPlayerTurn(){
+	$('#player_turn').text(turnPlayer);
+}
+//для первого хода
+changeDivPlayerTurn();

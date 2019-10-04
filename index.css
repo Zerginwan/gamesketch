@@ -31,6 +31,9 @@
 .allowdrop{
     background-color: lightgreen;
 }
+.allowdrop_selected{
+    background-color: palegreen;
+}
 
 
 .rule_table{
@@ -43,7 +46,6 @@
     height: 1em;
     width: 5em;
     border-bottom: 0.1em;
-    border-color: blueviolet;
 }
 
 .rule_cell{
@@ -63,7 +65,10 @@
     background-color: lightgreen;
 }
 .selected{
-    outline-style: double;
-    outline:        0.2em;
-    outline-color:  tomato;
+    border: 2px double tomato;
 }
+
+table {
+    border: 1px solid black;
+    margin: 1em;
+  }

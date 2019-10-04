@@ -80,6 +80,7 @@ function makeTable(name, player){
 }
 
 
+
 //заглушка для рисования "Бумажек". Вспомогательная функция.
 function drawRules(rulesArray){
     for(let rule in rulesArray){
@@ -95,7 +96,27 @@ function drawRules(rulesArray){
         //добавляем таблице центральную точку.
         table.childNodes[2].childNodes[2].classList.add("rule_center");
     }
-    
+    //навешиваем селектор
+    $(".rule_table").click(function(){
+        //кликать можно только в свои таблицы
+        if (this.parentElement.id == turnPlayer+"_rules"){
+        //если она уже заселекчена, то все селеккты сбрасываются
+           if( this.classList.contains("selected") ){
+                $(".selected").removeClass("selected") ;
+                selectedRule = "";
+            
+            }else{
+            //если не заселекчена, все другие селекты сбрасываются, а этот селект появляется.
+                $(".selected").removeClass("selected") ;
+                this.classList.add("selected");
+                selectedRule = this.id;
+            }
+        }else{
+            //если это чужие таблицы - все селекты сбрасываются
+            $(".selected").removeClass("selected") ;
+            selectedRule = "";
+        }
+    });
  
  }
 
@@ -104,25 +125,26 @@ function generateRules(privateRulesCount, generalRulesCount){
     drawRules(rulesArray);
 
 }
+//сносим все таблицы с экрана
+function deleteRules(){
+    $('table.rule_table').remove();
+}
+
+function redrawRules(rulesArray){
+  
+    deleteRules();
+
+    drawRules(rulesArray);
+
+}
 
 
 generateRules(privateRulesCount, generalRulesCount);
 
 
+function unselectAll() {
+    $(".selected").removeClass("selected") ;
+            selectedRule = "";
+}
 //селектим табличку с нужным правилом.
-$(".rule_table").click(function(){
-    //если она уже заселекчена, то все селеккты сбрасываются
-    if( this.classList.contains("selected") ){
-        $(".selected").removeClass("selected") ;
-        selectedRule = "";
-        
-    }else{
-    //если не заселекчена, все другие селекты сбрасываются, а этот селект появляется.
-        $(".selected").removeClass("selected") ;
-        this.classList.add("selected");
-        selectedRule = this.id;
-        
-    }
 
-    
-});
