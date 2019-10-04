@@ -32,28 +32,22 @@
     background-color: lightgreen;
 }
 
-div.rule_center{
-    background-color: black;
-}
-div.rule_dot{
-    background-color: lightgreen;
-}
+
 .rule_table{
-    display:   inline-flex;
+    background-color: azure;
     height:     5em;
     width:      5em;
 }
 
 .rule_row{
-
     height: 1em;
     width: 5em;
     border-bottom: 0.1em;
-    border-color: skyblue
+    border-color: blueviolet;
 }
 
 .rule_cell{
-
+    background-color: whitesmoke;
     height: 1em;
     width: 1em;
 }
@@ -61,6 +55,12 @@ div.rule_dot{
 .player_rules{
     align-self: stretch;
     align-items: center;
+}
+.rule_center{
+    background-color: black;
+}
+.rule_dot{
+    background-color: lightgreen;
 }
 .selected{
     outline-style: double;

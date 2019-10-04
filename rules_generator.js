@@ -58,7 +58,7 @@ function generateRulesArray(){
 }
 //рисуем таблички для drawRules
 function makeTable(name, player){
-    let table = document.createElement('div');
+    let table = document.createElement('table');
     table.setAttribute('id', name);
     table.classList.add('rule_table');
     let tablePlaceId = player+"_rules";
@@ -66,10 +66,10 @@ function makeTable(name, player){
 
 
     for (let i=0; i<5; i++) {
-        let row = document.createElement('div');
+        let row = document.createElement('tr');
         row.classList.add('rule_row');
         for (let j=0; j<5; j++) {
-            let cell = document.createElement('div');
+            let cell = document.createElement('td');
             cell.classList.add('rule_cell');
             row.append(cell);
         }
