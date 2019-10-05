@@ -102,19 +102,17 @@ function drawRules(rulesArray){
         if (this.parentElement.id == turnPlayer+"_rules"){
         //если она уже заселекчена, то все селеккты сбрасываются
            if( this.classList.contains("selected") ){
-                $(".selected").removeClass("selected") ;
-                selectedRule = "";
+                unselectAll();
             
             }else{
             //если не заселекчена, все другие селекты сбрасываются, а этот селект появляется.
-                $(".selected").removeClass("selected") ;
+                unselectAll();
                 this.classList.add("selected");
                 selectedRule = this.id;
             }
         }else{
             //если это чужие таблицы - все селекты сбрасываются
-            $(".selected").removeClass("selected") ;
-            selectedRule = "";
+            unselectAll();
         }
     });
  
