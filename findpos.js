@@ -1,87 +1,52 @@
-//ищем местоположение, которая фигура занимает в positionMatrix
-function findFigurePosition(event) {
-    
-    for (var i=0; i<positionMatrix.length; i++) {
-        var findId = positionMatrix[i].indexOf(event.target.id);
-        var positionColumn = NaN;
-        if (findId >= 0)
-            positionColumn = findId; 
-            var positionRow = i;
-    }
-
-    var currentPosition = [positionRow, positionColumn];
-    return currentPosition;
-}
-
-//cейчас при движении фигурки ее координаты не обновляются, потому что нам нужно,
-//чтобы при движении менялась и positionMatrix
-
-//ф-ия, чтобы узнать позицию пустого дива
-function findDivPosition(event){
-    //ищем столбец с помощью подсчета предыдущих сиблингов previousSibling
-    var count = 0;
-    var p = event.target.previousSibling;
-    
-    for (var i=0; i<4; i++) {
-        
-        if (p != null) {
-            count = count + 1;
-            p = p.previousSibling;
-        }   
-    }
-    
-    var divColumn = count;
-    
-    //ищем строку с помощью parentElement и previousSibling
-    var count=0;
-    var parent = event.target.parentElement;
-
-    var p = parent.previousSibling;
-
-    for (var i=0; i<4; i++) {
-
-        if (p!=null) {
-            count = count + 1;
-            p = p.previousSibling;
+//нахождение координат. Ищет по имени класса ячейки и строки
+function quickFindFigurePosition(event) {
+    let thisId = event.target.id;
+    let figure = document.getElementById(thisId);
+    let cell = figure.parentElement;
+    let row = cell.parentElement;
+    let positionColumn = NaN;
+    let positionRow = NaN;
+//пробегаемся по классам строкии находим класс с номером. Обрезаем, получаем номер.
+    for (let className of row.classList) {
+        if ( className.startsWith("row_")  ) {
+             positionRow = className.slice(4);
         }
     }
-
-    var divRow = count;
-    var divPos = [divRow, divColumn];
-    console.log(divPos);
-    return divPos;
-
-}
-
-function findDivPositionReplaced(cell){
-    //ищем столбец с помощью подсчета предыдущих сиблингов previousSibling
-    var count = 0;
-    var p = cell.previousSibling;
-    
-    for (var i=0; i<4; i++) {
-        
-        if (p != null) {
-            count = count + 1;
-            p = p.previousSibling;
-        }   
-    }
-    
-    var divColumn = count;
-
-    //ищем строку с помощью parentElement и previousSibling
-    var count=0;
-    var parent = cell.parentElement;
-    var p = parent.previousSibling;
-    for (var i=0; i<5; i++) {
-
-        if (p!=null) {
-            count = count + 1;
-            p = p.previousSibling;
+//тоже самое с ячейкой.
+    for (let className of cell.classList) {
+        if ( className.startsWith("cell_")  ) {
+             positionColumn = className.slice(5);
         }
     }
+//возвращаем JSON
+    return {
+        row:    positionRow,
+        column: positionColumn
+    }
+}
 
-    var divRow = count;
-    var divPos = [divRow, divColumn];
-    console.log(divPos);
-    return divPos;
+
+function findDivPosition(div) {
+    let cell = div;
+    let row = div.parentElement;
+
+    let positionColumn = NaN;
+    let positionRow = NaN;
+//пробегаемся по классам строкии находим класс с номером. Обрезаем, получаем номер.
+    for (let className of row.classList) {
+        if ( className.startsWith("row_")  ) {
+             positionRow = className.slice(4);
+        }
+    }
+//тоже самое с ячейкой.
+    for (let className of cell.classList) {
+        if ( className.startsWith("cell_")  ) {
+             positionColumn = className.slice(5);
+        }
+    }
+//возвращаем JSON
+    return {
+        row:    positionRow,
+        column: positionColumn
+    }
 }
