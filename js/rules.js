@@ -1,5 +1,4 @@
-//Генерим "бумажки". Private - сколько "личных" правил. General - Сколько общих.
-//Пока все общие.
+//Private - сколько "личных" правил. General - Сколько общих.
 let privateRulesCount = 2;
 let generalRulesCount = 1;
 let dotsInRule = 4;  //сколько ходов в одном правиле.
@@ -8,9 +7,7 @@ let rulesArray = [];
 let selectedRule = "";
 
 
-
-//нужно чтобы сгенерить клетки вокрг центра квадрата 5х5, но не в центре.
-//возвращает массив вида [x,y] = [0,4]
+//Функция генерит клетки вокрг центра квадрата 5х5, но не в центре
 function random_cell(){
     let rand1 = Math.floor(Math.random() * 5);
     let rand2 = Math.floor(Math.random() * 5);
@@ -24,7 +21,7 @@ function random_cell(){
 }
 
 
-//генерируем массив и возвращаем его. Вспомогательная функция.
+//Функция генерирует массив правил и возвращает его
 function generateRulesArray(){
     let rulesArray = []; //создаем массив для правил
     //делаем сколько-то правил. x2 частных x1 общих.
@@ -56,7 +53,8 @@ function generateRulesArray(){
     return rulesArray;
 
 }
-//рисуем таблички для drawRules
+
+//Функция рисует таблички для drawRules
 function makeTable(name, player){
     let table = document.createElement('table');
     table.setAttribute('id', name);
@@ -80,8 +78,7 @@ function makeTable(name, player){
 }
 
 
-
-//заглушка для рисования "Бумажек". Вспомогательная функция.
+//Функция рисует правила
 function drawRules(rulesArray){
     for(let rule in rulesArray){
         //создаем таблицу
@@ -118,31 +115,45 @@ function drawRules(rulesArray){
  
  }
 
+//Основная функция: создает и рисует правила
 function generateRules(privateRulesCount, generalRulesCount){
     rulesArray = generateRulesArray();
     drawRules(rulesArray);
 
 }
-//сносим все таблицы с экрана
+
+//Функция для удаления всех таблиц с экрана
 function deleteRules(){
     $('table.rule_table').remove();
 }
 
+//Функция перерисовки правил
 function redrawRules(rulesArray){
   
     deleteRules();
-
     drawRules(rulesArray);
-
 }
 
-
-generateRules(privateRulesCount, generalRulesCount);
-
-
+//Функция убирает выделение
 function unselectAll() {
     $(".selected").removeClass("selected") ;
             selectedRule = "";
 }
-//селектим табличку с нужным правилом.
+
+//Функция для переделки правил
+function change_rule(array, modifier){
+	//0:0 -> -2:-2   4:4 -> 2:2 . Смотрим по нижнему (первому) игроку. 
+	//0:0 -> 2:2    4:4 -> -2:-2  - так выглядит у второго
+	let rule = [];
+	//перебираем все точки в правиле
+	for (let i=0;i<dotsInRule;i++){
+		//за каждую точку создаем точку в новом массиве
+		rule.push([]);
+		//выдаем точке в новом массиве новые координаты.
+		rule[i].row =  (array[i].row - 2) * modifier;
+		rule[i].column =  (array[i].column - 2) * modifier;
+	}
+	//возвращаем новый массив
+	return rule;
+}
 

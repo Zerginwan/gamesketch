@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+/* General */
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Game background */
+main {
+    height: 100vh;
+    background: #333 url('../img/showcase.jpg') no-repeat center center/cover;
+}
+
+/* Overlay */
+#container {
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+/* P*/
+p {
+    color: rgb(102, 150, 196);
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+/* 3 columns */
+#left {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex:1;
+    padding-left: 1rem;
+}
+
+#right {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    flex: 1;
+    padding-right: 1rem;
+    padding-top: 2.3rem;
+}
+
+#center {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.player_rules {
+    display: flex;
+    flex-direction: row;
+}
+
+#secondplayer_rules {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Field */
+.row {
+    display: flex;
+}
+
+.cell {
+    width: 6rem;
+    height: 6rem;
+    background: rgba(1,1,1,0.7);
+    border: 1px solid rgba(140, 186, 216, 0.2);
+    margin-left: -1px;
+    margin-top: -1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Figures */
+.figure {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.firstplayer {
+    background: url('../img/whitefigure.png') no-repeat center center/cover;
+}
+
+.secondplayer {
+    background: url('../img/bluefigure.png') no-repeat center center/cover;
+}
+
+#id12 {
+    background: url('../img/masterwhite.png') no-repeat center center/cover;
+}
+
+#id22 {
+    background: url('../img/masterblue.png') no-repeat center center/cover;
+}
+
+/* Rule tables */
+
+.rule_table{
+    height:     7.5rem;
+    width:      7.5rem;
+}
+
+.rule_row{
+    height: 1.5rem;
+    width: 7.5rem;
+    
+}
+
+.rule_cell{
+    background-color: rgba(1,1,1,0.7);
+    border: 1px solid rgba(140, 186, 216, 0.2);
+    margin-left: -1px;
+    margin-top: -1px;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.player_rules{
+    align-self: stretch;
+    align-items: center;
+}
+.rule_center{
+    background-color: rgba(196, 10, 243, 0.5);
+}
+.rule_dot{
+    background-color:rgba(140, 186, 216, 0.5);
+    
+}
+.selected{
+    border: 2px solid rgba(140, 186, 216, 0.5);
+}
+
+table {
+    margin: 1rem;
+  }
+
+
+.allowdrop{
+    background-color: rgba(140, 186, 216, 0.5);
+}
+.allowdrop_selected{
+    background-color: rgba(140, 186, 216, 0.5);
+}
+
+#player_turn {
+    color: rgb(198, 114, 219);
+    font-size: 2rem;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    padding-top: 8rem;
+}
+
+#victory {
+    align-self: center;
+    color: rgb(198, 114, 219);
+    font-size: 2rem;
+}
+
+.newgame {
+    margin-right: 4.5rem;
+    margin-top: 1rem;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    background-color: rgba(140, 186, 216);
+    border: none;
+    border-radius: 3px;
+    color: #333;
+    cursor: pointer;
+}
+
+.newgame:hover {
+    background-color: rgba(120, 166, 206);
+}
+
+#buttonplace {
+    align-self: center;
+    margin-top: 1rem;
+    margin-left: 2rem;
+}
+
+#secondplayer_rules {
+    transform: rotate(180deg);
+}
