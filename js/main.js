@@ -1,9 +1,13 @@
+drawAllFigures();
+
 let allFigures = document.querySelectorAll('.figure');
 let allCells = document.querySelectorAll('.cell');
 let turnPlayer = "firstplayer";
 
+
 //Реализация Drag'n'Drop
 //Проходимся циклом по фигуркам и назначаем drag event и св-во draggable
+function dragAndDrop() {
 for (let el of allFigures) {
 	el.setAttribute('draggable', 'true');
 	el.setAttribute('ondragstart', "drag(event)");
@@ -14,7 +18,9 @@ for (let el of allCells) {
 	el.setAttribute('ondrop', 'drop(event)');
 	el.setAttribute('ondragover', "allowDrop(event)");
 }
+}
 
+dragAndDrop();
 //Drag Functions
 function allowDrop(ev) {
 	ev.preventDefault();
@@ -62,10 +68,14 @@ function drop(ev) {
 generateRules(privateRulesCount, generalRulesCount);
 
 //Подсветка допустимых клеток
-for (let el of allFigures) {
-el.addEventListener('mouseover', setLight);
-el.addEventListener('mouseout', removeLight);
+function setLightEvents() {
+	let allFigures = document.querySelectorAll('.figure');
+	for (let el of allFigures) {
+		el.addEventListener('mouseover', setLight);
+		el.addEventListener('mouseout', removeLight);
+	}
 }
+setLightEvents();
 
 //для первого хода
 changeDivPlayerTurn();

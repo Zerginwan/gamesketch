@@ -81,10 +81,10 @@ function do_we_won(targetDiv){
         buttonPlace.append(newGameButton);
 
 		//заглушка для функции начала новой игры
-        $('.newgame').click(function() {
-            location.reload();
-        });
-        
+        // $('.newgame').click(function() {
+        //     location.reload();
+        // });
+        $('.newgame').click(startNewGame);
         
 	}
 	
@@ -123,4 +123,34 @@ function rotateField() {
 	// leftSide.appendChild(rightPlayerRules);
 	// rightSide.appendChild(leftPlayerRules);
 	
+}
+
+//функция начала новой игры пока не работает - проблемы с перемещением фигур и правилами
+function startNewGame() {
+	
+	let buttonPlace = document.getElementById('buttonplace');
+	buttonPlace.remove();
+	let victory = document.getElementById('victory');
+	victory.style.display = 'none';
+	let center = document.getElementById('center');
+	center.style.display = 'flex';
+	let left = document.getElementById('left');
+	left.style.display = 'flex';
+	let right = document.getElementById('right');
+	right.style.display = 'flex';
+	let field = document.getElementById('field');
+	field.style.display = 'block';
+
+	$('.figure').remove();
+	drawAllFigures();
+	let allFigures = document.querySelectorAll('.figure');
+	let allCells = document.querySelectorAll('.cell');
+	let turnPlayer = "firstplayer";
+	dragAndDrop();
+
+	deleteRules();
+	generateRules(privateRulesCount, generalRulesCount);
+	
+	setLightEvents();
+	changeDivPlayerTurn();
 }

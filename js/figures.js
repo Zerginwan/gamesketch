@@ -2,6 +2,7 @@
 var columnsNumber = 5; //x
 var rowsNumber = 5;  //y
 
+function drawAllFigures() {
 let allRows = document.querySelectorAll('.row');
 
 //фигурки первого игрока размещаем внизу (на последней строке), фигурки второго — на первой строке.
@@ -30,4 +31,5 @@ for (let i=0; i<columnsNumber; i++) {
     figure2.setAttribute('id', newId2);
     figure2.setAttribute('class', 'figure secondplayer' + masterClass);
     firstRowCells[i].append(figure2);
+}
 }
