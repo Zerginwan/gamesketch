@@ -33,3 +33,4 @@ for (let i=0; i<columnsNumber; i++) {
     firstRowCells[i].append(figure2);
 }
 }
+

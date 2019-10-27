@@ -8,16 +8,16 @@ let turnPlayer = "firstplayer";
 //Реализация Drag'n'Drop
 //Проходимся циклом по фигуркам и назначаем drag event и св-во draggable
 function dragAndDrop() {
-for (let el of allFigures) {
-	el.setAttribute('draggable', 'true');
-	el.setAttribute('ondragstart', "drag(event)");
-}
+	for (let el of allFigures) {
+		el.setAttribute('draggable', 'true');
+		el.setAttribute('ondragstart', "drag(event)");
+	}
 
-//Проходимся циклом по пустым дивам и назначаем drag events
-for (let el of allCells) {
-	el.setAttribute('ondrop', 'drop(event)');
-	el.setAttribute('ondragover', "allowDrop(event)");
-}
+	//Проходимся циклом по пустым дивам и назначаем drag events
+	for (let el of allCells) {
+		el.setAttribute('ondrop', 'drop(event)');
+		el.setAttribute('ondragover', "allowDrop(event)");
+	}
 }
 
 dragAndDrop();
@@ -81,7 +81,7 @@ setLightEvents();
 changeDivPlayerTurn();
 
 //заглушка для функции начала новой игры при нажатии на кнопку
-//пока что просто перезагружает страницу
+
 $('.newgame').click(function() {
-    location.reload();
+    startNewGame();
 });

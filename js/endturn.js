@@ -15,7 +15,7 @@ function end_turn(targetDiv){
 	unselectAll();
 	do_we_won(targetDiv);
 	changeDivPlayerTurn();
-	rotateField();
+	rotateAll();
 }
 
 //Функция проверки выигрыша
@@ -96,9 +96,8 @@ function changeDivPlayerTurn(){
 }
 
 //Переворот поля
-function rotateField() {
+function rotateField(degreeCount) {
 	
-	let degreeCount = (turnPlayer == "secondplayer")?180:0;
 	let mainField = document.getElementById('field');
 	mainField.style.transform = 'rotate('+degreeCount+'deg)';
 
@@ -110,19 +109,36 @@ function rotateField() {
 
 	$('.'+turnPlayer+'_rules>.rule_table').css({'transform': 'rotate(180deg)'});
 	$('.'+turnPlayerOpposite+'_rules>.rule_table').css({'transform': 'rotate(0deg)'});
-	//смена правил местами, правила меняются, но надо поработать над переворачиванием
-	// let rightSide = document.getElementById('rightrules');
-	// let rightId = rightSide.childNodes[3].id;
-	// console.log(rightSide.childNodes);
-	// let rightPlayerRules = document.getElementById(rightId);
 	
-	// let leftSide = document.getElementById('leftrules');
-	// let leftId = leftSide.childNodes[3].id;
-	// let leftPlayerRules = document.getElementById(leftId);
-	
-	// leftSide.appendChild(rightPlayerRules);
-	// rightSide.appendChild(leftPlayerRules);
-	
+}
+
+function switchRules(){
+	//смена правил местами, 
+	//выбираем div-плейсхолдеры для правил
+	let rightSide = document.getElementById('rightrules');
+	let leftSide = document.getElementById('leftrules');
+	//ищем div'ы c таблицами правил
+	let rightRules = $('#rightrules .player_rules')[0] ;
+	let leftRules = $('#leftrules .player_rules')[0] ;
+	//меняем местами
+	leftSide.appendChild(rightRules);
+	rightSide.appendChild(leftRules);
+}
+
+function rotateRules(degreeCount){
+	//переворачиваем все таблички
+	$('table.rule_table').css('transform', 'rotate('+degreeCount+'deg)');
+	//переворачиваем общее правило обратно для второго игрока.
+	if(degreeCount == '180'){
+		$('#all_rules > table.rule_table').first().css('transform', 'rotate(0deg)');
+	}
+}
+
+function rotateAll(){
+	let degreeCount = (turnPlayer == "secondplayer")?180:0;
+	rotateField(degreeCount);
+	switchRules();
+	rotateRules(degreeCount);
 }
 
 //функция начала новой игры пока не работает - проблемы с перемещением фигур и правилами
