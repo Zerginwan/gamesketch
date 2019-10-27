@@ -1,6 +1,5 @@
 drawAllFigures();
 
-let allFigures = document.querySelectorAll('.figure');
 let allCells = document.querySelectorAll('.cell');
 let turnPlayer = "firstplayer";
 
@@ -8,6 +7,7 @@ let turnPlayer = "firstplayer";
 //Реализация Drag'n'Drop
 //Проходимся циклом по фигуркам и назначаем drag event и св-во draggable
 function dragAndDrop() {
+	let allFigures = document.querySelectorAll('.figure');
 	for (let el of allFigures) {
 		el.setAttribute('draggable', 'true');
 		el.setAttribute('ondragstart', "drag(event)");
