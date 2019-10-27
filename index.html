@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- jQuery -->
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Game</title>
+    <link href="css/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <div id="container">
+            
+            <div id="left">
+                <div id='commonrule'>
+                    <p>Common rule:</p>
+                    <div id="all_rules"></div>
+                </div>
+                
+                <div id="leftrules">
+                    <p>Rules:</p>
+                    <div id="firstplayer_rules"  class="player_rules"></div>
+                </div>
+            </div>
+            
+            <div id='center'>
+                <div id="victory"></div>
+                <div id="field">
+                    <div class="row row_0">
+                        <div class='cell cell_0'></div> 
+                        <div class='cell cell_1'></div> 
+                        <div class='cell cell_2'></div> 
+                        <div class='cell cell_3'></div> 
+                        <div class='cell cell_4'></div> 
+                    </div>
+                    <div class="row row_1">
+                        <div class='cell cell_0'></div> 
+                        <div class='cell cell_1'></div> 
+                        <div class='cell cell_2'></div> 
+                        <div class='cell cell_3'></div> 
+                        <div class='cell cell_4'></div>
+                    </div>
+                    <div class="row row_2">
+                        <div class='cell cell_0'></div> 
+                        <div class='cell cell_1'></div> 
+                        <div class='cell cell_2'></div> 
+                        <div class='cell cell_3'></div> 
+                        <div class='cell cell_4'></div>
+                    </div>
+                    <div class="row row_3">
+                        <div class='cell cell_0'></div> 
+                        <div class='cell cell_1'></div> 
+                        <div class='cell cell_2'></div> 
+                        <div class='cell cell_3'></div> 
+                        <div class='cell cell_4'></div>
+                    </div>
+                    <div class="row row_4">
+                        <div class='cell cell_0'></div> 
+                        <div class='cell cell_1'></div> 
+                        <div class='cell cell_2'></div> 
+                        <div class='cell cell_3'></div> 
+                        <div class='cell cell_4'></div>
+                    </div>
+                </div>
+                <div id='buttonplace'></div>
+            </div>
+
+            <div id="right">
+                <div id='rightrules'>
+                    <p>Rules:</p>
+                    <div id="secondplayer_rules" class="player_rules"></div>
+                </div>
+                
+                <div id="player_turn"></div>
+                <button class='newgame'>New Game</button>
+                
+            </div>
+            
+        </div>
+    </main>
+
+    <script src='js/figures.js'></script>
+    <script src='js/find.js'></script>
+    <script src='js/rules.js'></script>
+    <script src="js/light.js"></script>
+    <script src="js/endturn.js"></script>
+    <script src='js/main.js'></script>
+</body>
+
+
+</html>
