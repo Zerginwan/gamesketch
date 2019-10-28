@@ -100,7 +100,7 @@ function rotateField(degreeCount) {
 	
 	let mainField = document.getElementById('field');
 	mainField.style.transform = 'rotate('+degreeCount+'deg)';
-
+	let allFigures = document.querySelectorAll('.figure');
 	for (el of allFigures) {
 		el.style.transform = 'rotate('+degreeCount+'deg)';
 	}
@@ -161,7 +161,7 @@ function startNewGame() {
 	drawAllFigures();
 	let allFigures = document.querySelectorAll('.figure');
 	let allCells = document.querySelectorAll('.cell');
-	let turnPlayer = "firstplayer";
+	turnPlayer = "firstplayer";
 	dragAndDrop();
 
 	deleteRules();
