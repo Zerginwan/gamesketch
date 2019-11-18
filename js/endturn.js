@@ -134,8 +134,13 @@ function rotateRules(degreeCount){
 	}
 }
 
-function rotateAll(){
-	let degreeCount = (turnPlayer == "secondplayer")?180:0;
+function rotateAll(degree){
+	let degreeCount
+	if(typeof(degree) != "undefined"){
+		degreeCount = degree;
+	}else{
+		degreeCount = (turnPlayer == "secondplayer")?180:0;
+	}
 	rotateField(degreeCount);
 	switchRules();
 	rotateRules(degreeCount);
@@ -145,7 +150,10 @@ function rotateAll(){
 function startNewGame() {
 	
 	let buttonPlace = document.getElementById('buttonplace');
-	buttonPlace.remove();
+	//если кнопка есть - убираем. Без проверки "if" выдаст ошибку в консоли и прервет программу
+	if (buttonPlace) {
+		buttonPlace.remove();
+	}
 	let victory = document.getElementById('victory');
 	victory.style.display = 'none';
 	let center = document.getElementById('center');
@@ -156,8 +164,11 @@ function startNewGame() {
 	right.style.display = 'flex';
 	let field = document.getElementById('field');
 	field.style.display = 'block';
-
+	//возвращаем поле "на место" - т.е. на положение первого игрока
+	rotateAll(0);
+	//убираем все старые фигурки
 	$('.figure').remove();
+	
 	drawAllFigures();
 	let allFigures = document.querySelectorAll('.figure');
 	let allCells = document.querySelectorAll('.cell');
